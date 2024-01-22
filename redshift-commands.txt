@@ -1,0 +1,46 @@
+select * from information_schema.tables;
+
+create table td_notes_test_rs (
+  user_id varchar(50),
+  timestamp int,
+  cat varchar(20),
+  title varchar(50),
+  content varchar(300),
+  note_id varchar(50),
+  username varchar(50)
+);
+
+select * from td_notes_test_rs;
+
+copy td_notes_test_rs from 'dynamodb://td_notes_test'
+readratio 100
+iam_role 'PUT_REDSHIFT_DYNAMODB_ROLE_ARN_HERE'
+;
+
+select * from td_notes_test_rs;
+
+select user_id, count(note_id) from td_notes_test_rs 
+group by user_id;
+
+
+create table td_notes_test_rs_2 (
+  user_id varchar(50),
+  timestamp int,
+  cat varchar(20),
+  title varchar(50),
+  content varchar(300),
+  note_id varchar(50),
+  user_name varchar(50)
+);
+
+copy td_notes_test_rs_2 from 'dynamodb://td_notes_test'
+readratio 100
+iam_role 'PUT_REDSHIFT_DYNAMODB_ROLE_ARN_HERE'
+;
+
+
+select n1.user_id as n1_user_id, n2.*
+from td_notes_test_rs as n1 
+inner join td_notes_test_rs_2 as n2
+on n1.user_id=n2.user_id and n1.timestamp = n2.timestamp
+;

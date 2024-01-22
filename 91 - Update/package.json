@@ -1,0 +1,17 @@
+{
+  "name": "update-cloudsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "aws": "^0.0.3-2",
+    "aws-sdk": "^2.245.1",
+    "sdk": "^0.1.1"
+  }
+}
